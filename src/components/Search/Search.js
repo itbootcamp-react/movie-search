@@ -6,6 +6,20 @@ import "./styled.css";
 const Search = ({ search }) => {
   const [searchValue, setSearchValue] = useState("");
 
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleReset = () => {
+    setSearchValue("");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    search(searchValue);
+    handleReset();
+  };
+
   return (
     <form className="search">
       <input
@@ -14,8 +28,14 @@ const Search = ({ search }) => {
         placeholder="Search for favorite movie"
         aria-label="Search"
         type="text"
+        onChange={handleChange}
       />
-      <button type="submit" value="SEARCH" className="search-button">
+      <button
+        onClick={handleSearch}
+        type="submit"
+        value="SEARCH"
+        className="search-button"
+      >
         <FontAwesomeIcon icon={faSearch} />
         <span>Search</span>
       </button>
